@@ -8,3 +8,7 @@ temp/
 # Scripts
 *.bat
 *.cmd
+
+# Node Items
+node_modules
+dist

@@ -1,6 +1,6 @@
-import { matchValues } from './core.ts';
-import { DocumentValue, DocumentPrimitive, QueryValue } from './types.ts';
-import { isArray, isUndefined, isString, isNumber, isBoolean, isNull, isObject } from './utils.ts';
+import { matchValues } from './core';
+import { DocumentValue, DocumentPrimitive, QueryValue } from './types';
+import { isArray, isUndefined, isString, isNumber, isBoolean, isNull, isObject } from './utils';
 
 /**
  * Selects documents where the value of a field more than specified number.

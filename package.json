@@ -1,0 +1,30 @@
+{
+	"name": "aloedb",
+	"version": "1.0.0",
+	"description": "NodeJS port of Deno package AloeDB",
+	"main": "index.js",
+	"directories": {
+		"lib": "lib",
+		"test": "tests"
+	},
+	"engines": {
+		"node": "^15.5.0"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"serve": "nodemon"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ElectroGamez/AloeDB.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ElectroGamez/AloeDB/issues"
+	},
+	"homepage": "https://github.com/ElectroGamez/AloeDB#readme",
+	"devDependencies": {
+		"@types/node": "^14.14.33"
+	}
+}

@@ -1,9 +1,9 @@
-import { Writer } from './writer.ts';
-import { Reader } from './reader.ts';
-import { DatabaseError } from './error.ts';
-import { searchDocuments, updateDocument, parseDatabaseStorage } from './core.ts';
-import { Document, DatabaseConfig, Query, QueryFunction, Update, UpdateFunction, Acceptable } from './types.ts';
-import { cleanArray, deepClone, isObjectEmpty, prepareObject, isArray, isFunction, isObject, isString, isUndefined } from './utils.ts';
+import { Writer } from './writer';
+import { Reader } from './reader';
+import { DatabaseError } from './error';
+import { searchDocuments, updateDocument, parseDatabaseStorage } from './core';
+import { Document, DatabaseConfig, Query, QueryFunction, Update, UpdateFunction, Acceptable } from './types';
+import { cleanArray, deepClone, isObjectEmpty, prepareObject, isArray, isFunction, isObject, isString, isUndefined } from './utils';
 
 /**
  * # AloeDB 🌿

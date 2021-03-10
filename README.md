@@ -3,60 +3,70 @@
 </p>
 
 <h3 align="center">AloeDB</h3>
-<p align="center"><i>Light, Embeddable, NoSQL database for Deno</i></p>
+<p align="center"><i>Light, Embeddable, NoSQL database for NodeJS</i></p>
 
 <p align="center">
-    <b>Work in progress!</b>
+    <b>Work in progress of a Work in progress!</b>
 </p>
 
 <br>
 
+## Port
+
+This is a hastily writen port of the Deno package: https://github.com/Kirlovon/AloeDB
+
 ## Features
-* ✨ Simple to use API, similar to [MongoDB](https://www.mongodb.com/)!
-* 🚀 Optimized for a large number of operations.
-* ⚖ No dependencies, even without [std](https://deno.land/std)!
-* 📁 Stores data in readable JSON file.
+
+-   ✨ Simple to use API, similar to [MongoDB](https://www.mongodb.com/)!
+-   🚀 Optimized for a large number of operations.
+-   ⚖ No dependencies, even without [std](https://deno.land/std)!
+-   📁 Stores data in readable JSON file.
 
 <br>
 
 ## Importing
+
 ```typescript
-import { Database, Operators, Types } from 'https://deno.land/x/aloedb/mod.ts'
+import { Database } from "./folder/to/package/";
 ```
 
 <br>
 
 ## Example
+
 ```typescript
-import { Database } from 'https://deno.land/x/aloedb/mod.ts'
+import { Database } from "./folder/to/package/";
 
 // Structure of stored documents
 interface Film {
-    title: string;
-    year: number;
-    film: boolean;
-    genres: string[];
-    authors: { director: string };n
+	title: string;
+	year: number;
+	film: boolean;
+	genres: string[];
+	authors: { director: string };
 }
 
-// Initialization
-const db = new Database<Film>('./path/to/the/file.json');
+(async () => {
+	// Initialization
+	const db = new Database<Film>("./path/to/the/file.json");
 
-// Insert operations
-await db.insertOne({
-    title: 'Drive',
-    year: 2012,
-    film: true,
-    genres: ['crime', 'drama', 'noir'],
-    authors: { director: 'Nicolas Winding Refn' }
-});
+	// Insert operations
+	await db.insertOne({
+		title: "Drive",
+		year: 2012,
+		film: true,
+		genres: ["crime", "drama", "noir"],
+		authors: { director: "Nicolas Winding Refn" },
+	});
 
-// Search operations
-const found: Film = await db.findOne({ title: 'Drive', film: true });
+	// Search operations
+	const found = await db.findOne({ title: "Drive", film: true });
+	console.log(found);
 
-// Update operations
-await db.updateOne({ title: 'Drive' }, { year: 2011 });
+	// Update operations
+	await db.updateOne({ title: "Drive" }, { year: 2011 });
 
-// Delete operations
-await db.deleteOne({ title: 'Drive' });
+	// Delete operations
+	await db.deleteOne({ title: "Drive" });
+})();
 ```

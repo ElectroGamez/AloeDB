@@ -1,4 +1,4 @@
-import { Document, DocumentValue, Query, QueryFunction, QueryValue, Update, UpdateFunction, UpdateValue } from './types.ts';
+import { Document, DocumentValue, Query, QueryFunction, QueryValue, Update, UpdateFunction, UpdateValue } from './types';
 
 import {
 	cleanArray,
@@ -16,7 +16,7 @@ import {
 	isUndefined,
 	numbersList,
 	prepareObject,
-} from './utils.ts';
+} from './utils';
 
 /**
  * Find documents positions.

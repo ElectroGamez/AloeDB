@@ -1,4 +1,4 @@
-import { PlainObject } from './types.ts';
+import { PlainObject } from './types';
 
 /**
  * Remove all empty items from the array.
@@ -26,7 +26,7 @@ export function numbersList(number: number): number[] {
  * @returns Is object empty or not.
  */
 export function isObjectEmpty(target: PlainObject): boolean {
-	for (let key in target) return false;
+	for (let _key in target) return false;
 	return true;
 }
 
@@ -37,7 +37,7 @@ export function isObjectEmpty(target: PlainObject): boolean {
  */
 export function getObjectLength(target: PlainObject): number {
 	let length: number = 0;
-	for (let key in target) length++;
+	for (let _key in target) length++;
 	return length;
 }
 

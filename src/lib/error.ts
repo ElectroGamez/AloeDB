@@ -1,4 +1,4 @@
-import { isString, isError } from './utils.ts';
+import { isString, isError } from './utils';
 
 /**
  * Custom database error. 

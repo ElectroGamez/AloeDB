@@ -1,3 +1,5 @@
+import { renameSync, writeFileSync } from "fs";
+
 /**
  * Data writing manager.
  * Uses atomic writing and prevents race condition.
@@ -42,8 +44,8 @@ export class Writer {
 
 		// Write data
 		const temp: string = this.path + this.extension;
-		await Deno.writeTextFile(temp, data);
-		await Deno.rename(temp, this.path);
+		await writeFileSync(temp, data);
+		await renameSync(temp, this.path);
 
 		// Unlock writing
 		this.locked = false;
