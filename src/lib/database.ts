@@ -393,7 +393,7 @@ export class Database<Schema extends Acceptable<Schema> = Document> {
 				? JSON.stringify(this.documents, null, '\t')
 				: JSON.stringify(this.documents);
 
-			this.writer.write(encoded);
+			await this.writer.write(encoded);
 
 		} catch (error) {
 			throw new DatabaseError('Error saving documents', error);

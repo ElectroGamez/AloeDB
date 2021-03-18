@@ -31,7 +31,7 @@ export class Writer {
 	  * Write data to the database file.
 	  * @param data Data to write.
 	  */
-	public async write(data: string): Promise<void> {
+	public write(data: string): void {
 
 		// Add writing to the queue if writing is locked
 		if (this.locked) {
@@ -44,8 +44,8 @@ export class Writer {
 
 		// Write data
 		const temp: string = this.path + this.extension;
-		await writeFileSync(temp, data);
-		await renameSync(temp, this.path);
+		writeFileSync(temp, data);
+		renameSync(temp, this.path);
 
 		// Unlock writing
 		this.locked = false;
