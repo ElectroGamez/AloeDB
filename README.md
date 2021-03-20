@@ -2,24 +2,25 @@
 	<img src="https://raw.githubusercontent.com/Kirlovon/AloeDB/master/other/head.png" alt="AloeDB Logo" width="256">
 </p>
 
-<h3 align="center">AloeDB</h3>
-<p align="center"><i>Light, Embeddable, NoSQL database for NodeJS</i></p>
+<h3 align="center">AloeDB-Node</h3>
+<p align="center"><i>Light local storage database for NodeJS</i></p>
 
 <p align="center">
-    <b>Work in progress of a Work in progress!</b>
+    <b>Work in progress of a Work in progress!</b><br>
+	<span>Forked from <a href="https://github.com/Kirlovon/AloeDB">Kirlovon their Deno package!</a></span>
 </p>
 
 <br>
 
 ## Port
 
-This is a hastily writen port of the Deno package: https://github.com/Kirlovon/AloeDB
+This is a port of the Deno package: https://github.com/Kirlovon/AloeDB
 
 ## Features
 
 -   ✨ Simple to use API, similar to [MongoDB](https://www.mongodb.com/)!
 -   🚀 Optimized for a large number of operations.
--   ⚖ No dependencies, even without [std](https://deno.land/std)!
+-   ⚖ No dependencies!
 -   📁 Stores data in readable JSON file.
 
 <br>
@@ -27,15 +28,15 @@ This is a hastily writen port of the Deno package: https://github.com/Kirlovon/A
 ## Importing
 
 ```typescript
-import { Database } from "./folder/to/package/";
+import { Database } from "aloedb-node";
 ```
 
 <br>
 
-## Example
+## Example 1 (Using a interface)
 
 ```typescript
-import { Database } from "./folder/to/package/";
+import { Database } from "aloedb-node";
 
 // Structure of stored documents
 interface Film {
@@ -70,3 +71,77 @@ interface Film {
 	await db.deleteOne({ title: "Drive" });
 })();
 ```
+
+## Example 2 (Class without a separate interface (Also using uuids and timestamps))
+```typescript
+import { Database } from "aloedb-node";
+import { v1 as uuidv1 } from "uuid";
+
+const db = new Database<Omit<Weather, "save" | "delete" | "update">>("./db/weather.json");
+
+export class Weather {
+    id: string;
+    timestamp: number;
+    temperature: number;
+    humidity: number;
+
+    constructor(data: Omit<Weather, "save" | "delete" | "update" | "id" | "timestamp"> & Partial<Pick<Weather, "id" | "timestamp">>) {
+        this.id = data.id ?? uuidv1();
+        this.timestamp = data.timestamp ?? new Date().getTime();
+        this.temperature = data.temperature;
+        this.humidity = data.humidity;
+    }
+
+    save() {
+        return db.insertOne(this);
+    }
+
+    delete() {
+        return db.deleteOne({ id: this.id });
+    }
+
+    update() {
+        return db.updateOne({ id: this.id }, this);
+    }
+
+    static async findOne(query: Partial<Omit<Weather, "save" | "delete" | "update">>): Promise<Weather | null> {
+        const object = await db.findOne(query);
+        if (object) return new Weather(object);
+        return null;
+    }
+
+    static async findMany(query: Partial<Omit<Weather, "save" | "delete" | "update">>): Promise<Weather[]> {
+        const objects = await db.findMany(query);
+
+        return objects.map((obj) => {
+            return new Weather(obj);
+        });
+    }
+}
+```
+### Using this class
+```typescript
+// Create a new entity
+const newWeather = new Weather({temperature: 15, humidity: 32});
+await newWeather.save();
+
+// Update a existing entity
+newWeather.temperature = 16;
+newWeather.update();
+
+// Find and existing entity
+const oldWeather = await Weather.findOne({ id: "13d2e1c2-feda-498f-8540-dd92f1087161" });
+
+// Delete a existing entity
+await oldWeather.delete();
+
+// Get an array of many entities
+const moreWeathers = await Weather.findMany({});
+
+for (const weather of moreWeathers) {
+	console.log(weather.id);
+}
+```
+
+## Support
+If you want to buy someone a coffee, try to get in contact with the <a href="https://github.com/Kirlovon/AloeDB">contributors from this package</a>, they did 99.9% of the work, I just made it run in node because I was frustrated with existing packages.

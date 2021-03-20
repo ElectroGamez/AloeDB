@@ -1,25 +1,34 @@
 {
-	"name": "aloedb",
-	"version": "1.0.0",
-	"description": "NodeJS port of Deno package AloeDB",
-	"main": "index.js",
+	"name": "aloedb-node",
+	"version": "1.0.1",
+	"description": "Light local storage database for NodeJS",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"/dist"
+	],
 	"directories": {
-		"lib": "lib",
-		"test": "tests"
+		"lib": "lib"
 	},
+	"keywords": [
+		"database",
+		"db",
+		"json",
+		"storage",
+		"local"
+	],
 	"engines": {
 		"node": "^15.5.0"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"serve": "nodemon"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ElectroGamez/AloeDB.git"
 	},
-	"author": "",
-	"license": "ISC",
+	"author": "Wouter de Bruijn",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/ElectroGamez/AloeDB/issues"
 	},
