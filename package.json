@@ -15,7 +15,9 @@
 		"db",
 		"json",
 		"storage",
-		"local"
+		"local",
+		"type",
+		"typescript
 	],
 	"engines": {
 		"node": "^15.5.0"
