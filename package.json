@@ -1,6 +1,6 @@
 {
 	"name": "aloedb-node",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Light local storage database for NodeJS",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
 		"storage",
 		"local",
 		"type",
-		"typescript
+		"typescript"
 	],
 	"engines": {
 		"node": "^15.5.0"

@@ -26,15 +26,12 @@ This is a port of the Deno package: https://github.com/Kirlovon/AloeDB
 <br>
 
 ## Importing
-
 ```typescript
 import { Database } from "aloedb-node";
 ```
 
-<br>
-
-## Example 1 (Using a interface)
-
+## Examples
+### Using an interface
 ```typescript
 import { Database } from "aloedb-node";
 
@@ -72,7 +69,7 @@ interface Film {
 })();
 ```
 
-## Example 2 (Class without a separate interface (Also using uuids and timestamps))
+### Class without a separate interface (Also using uuids and timestamps)
 ```typescript
 import { Database } from "aloedb-node";
 import { v1 as uuidv1 } from "uuid";
@@ -119,7 +116,60 @@ export class Weather {
     }
 }
 ```
-### Using this class
+
+### Class with seperate Interface
+```typescript
+import { Database } from "aloedb-node";
+import { v1 as uuidv1 } from "uuid";
+
+const db = new Database<IUser>("./db/user.json");
+
+interface IUser {
+    id?: string;
+    email: string;
+    hash: string;
+}
+
+export class User {
+    id: string;
+    email: string;
+    hash: string;
+
+    constructor(data: IUser) {
+        this.id = data.id ?? uuidv1();
+        this.email = data.email;
+        this.hash = data.hash;
+    }
+
+    save() {
+        return db.insertOne(this);
+    }
+
+    delete() {
+        return db.deleteOne({ id: this.id });
+    }
+
+    update() {
+        return db.updateOne({ id: this.id }, this);
+    }
+
+    static async findOne(query: Partial<IUser>): Promise<User | null> {
+        const object = await db.findOne(query);
+        if (object) return new User(object);
+        return null;
+    }
+
+    static async findMany(query: Partial<IUser>): Promise<User[]> {
+        const objects = await db.findMany(query);
+
+        return objects.map((obj) => {
+            return new User(obj);
+        });
+    }
+}
+```
+
+### Using one of these classes
 ```typescript
 // Create a new entity
 const newWeather = new Weather({temperature: 15, humidity: 32});
